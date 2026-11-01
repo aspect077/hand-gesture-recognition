@@ -25,10 +25,10 @@ Custom dataset recorded with `collect.py` (8,624 samples, about 550-620 per clas
 | Session | Conditions |
 |---|---|
 | 1 | Indoors, lights on, camera close, right hand |
-| 2 | Balcony (daylight), right hand |
+| 2 | Balcony (outdoor light), right hand |
 | 3 | Lights off, camera farther away, left hand |
 
-The data is in `session1.csv`. The `session` column was assigned afterwards by splitting the file into its three consecutive recording blocks.
+The data is in `session1.csv`. All rows in this file are labelled session 1. The three recording sessions are consecutive blocks of the file (each block is the five gestures recorded in order) and are separated in the training notebook by detecting where the label returns to `OPEN_PALM`.
 
 ## Training and evaluation
 
@@ -47,11 +47,11 @@ The data is in `session1.csv`. The `session` column was assigned afterwards by s
 
 Mirror augmentation made no measurable difference on this test set. Validation accuracy (about 99.9%) is optimistic because consecutive frames from the same recording are near-duplicates; the held-out session is the honest result.
 
-All 18 errors were PEACE or ONE_FINGER predicted as FIST/THUMBS_UP (see `confusion_matrix.png`).
+The 18 errors were all PEACE or ONE_FINGER samples predicted as FIST, THUMBS_UP or each other (see `confusion_matrix.png`).
 
 ## Run it
 
-Requires **Python 3.11** (MediaPipe 0.10.14 has no builds for 3.13).
+Developed and tested with **Python 3.11** (recommended; MediaPipe 0.10.14 failed to install on Python 3.13).
 
 ```powershell
 python -m venv venv
